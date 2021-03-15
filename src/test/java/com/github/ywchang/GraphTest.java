@@ -30,4 +30,39 @@ class GraphTest {
       graph.getDistance("A", "B");
     });
   }
+
+  @Test
+  public void should_return_trips_with_maximum_stops() {
+    Graph graph = new Graph();
+    graph.addRoute("CE2");
+    graph.addRoute("EB3");
+    graph.addRoute("BC4");
+    assertEquals(1, graph.getTripsWithMaxStops("C", "C", 3));
+  }
+
+  @Test
+  public void should_return_trips_with_maximum_stops_with_loop() {
+    Graph graph = new Graph();
+    graph.addRoute("CD8");
+    graph.addRoute("DC8");
+    assertEquals(2, graph.getTripsWithMaxStops("C", "C", 4));
+  }
+
+  @Test
+  public void should_return_trips_with_exact_stops() {
+    Graph graph = new Graph();
+    graph.addRoute("CE2");
+    graph.addRoute("EB3");
+    graph.addRoute("BC4");
+    assertEquals(1, graph.getTripsWithExactStops("C", "C", 3));
+    assertEquals(0, graph.getTripsWithExactStops("C", "C", 4));
+  }
+
+  @Test
+  public void should_return_trips_with_exact_stops_with_loop() {
+    Graph graph = new Graph();
+    graph.addRoute("CD8");
+    graph.addRoute("DC8");
+    assertEquals(1, graph.getTripsWithExactStops("C", "C", 4));
+  }
 }
